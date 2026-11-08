@@ -1,0 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-[#eaedec] text-stone-900 antialiased transition-colors duration-200 dark:bg-zinc-950 dark:text-zinc-100;
+}
