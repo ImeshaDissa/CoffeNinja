@@ -1,0 +1,77 @@
+/**
+ * Centralized domain and HTTP constants to eliminate magic strings and numbers.
+ */
+
+export const USER_ROLE = {
+  STAFF: 'STAFF',
+  MANAGER: 'MANAGER',
+} as const;
+
+export type UserRoleType = (typeof USER_ROLE)[keyof typeof USER_ROLE];
+
+export const INQUIRY_STATUS = {
+  NEW: 'NEW',
+  IN_PROGRESS: 'IN_PROGRESS',
+  RESOLVED: 'RESOLVED',
+} as const;
+
+export type InquiryStatusType = (typeof INQUIRY_STATUS)[keyof typeof INQUIRY_STATUS];
+
+export const HTTP_STATUS = {
+  OK: 200,
+  CREATED: 201,
+  NO_CONTENT: 204,
+  BAD_REQUEST: 400,
+  UNAUTHORIZED: 401,
+  FORBIDDEN: 403,
+  NOT_FOUND: 404,
+  CONFLICT: 409,
+  UNPROCESSABLE_ENTITY: 422,
+  TOO_MANY_REQUESTS: 429,
+  INTERNAL_SERVER_ERROR: 500,
+} as const;
+
+export const ERROR_CODE = {
+  VALIDATION_ERROR: 'VALIDATION_ERROR',
+  INVALID_CREDENTIALS: 'INVALID_CREDENTIALS',
+  UNAUTHORIZED: 'UNAUTHORIZED',
+  FORBIDDEN: 'FORBIDDEN',
+  NOT_FOUND: 'NOT_FOUND',
+  DUPLICATE_INQUIRY: 'DUPLICATE_INQUIRY',
+  STALE_DATA: 'STALE_DATA',
+  INVALID_STATUS_TRANSITION: 'INVALID_STATUS_TRANSITION',
+  RATE_LIMIT_EXCEEDED: 'RATE_LIMIT_EXCEEDED',
+  INTERNAL_ERROR: 'INTERNAL_ERROR',
+} as const;
+
+export type ErrorCodeType = (typeof ERROR_CODE)[keyof typeof ERROR_CODE];
+
+export const PAGINATION_LIMITS = {
+  DEFAULT_PAGE: 1,
+  DEFAULT_PAGE_SIZE: 10,
+  MAX_PAGE_SIZE: 50,
+} as const;
+
+export const SECURITY_CONSTANTS = {
+  BCRYPT_SALT_ROUNDS: 12,
+  AUTH_COOKIE_NAME: 'cn_session',
+  JWT_ISSUER: 'coffee-ninja-api',
+  JWT_AUDIENCE: 'coffee-ninja-web',
+  JWT_ALGORITHM: 'HS256',
+  MAX_COOKIE_AGE_MS: 8 * 60 * 60 * 1000, // 8 hours
+  JSON_BODY_LIMIT: '100kb',
+} as const;
+
+export const FIELD_LIMITS = {
+  CUSTOMER_NAME_MIN: 2,
+  CUSTOMER_NAME_MAX: 120,
+  CONTACT_INFO_MIN: 5,
+  CONTACT_INFO_MAX: 160,
+  SUBJECT_MIN: 3,
+  SUBJECT_MAX: 200,
+  DESCRIPTION_MIN: 10,
+  DESCRIPTION_MAX: 2000,
+  RESOLUTION_NOTE_MAX: 1000,
+  SEARCH_QUERY_MAX: 100,
+} as const;
+
