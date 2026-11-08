@@ -4,10 +4,65 @@ import React from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Bell, LogOut, Moon, ShieldCheck, Sun } from 'lucide-react';
-import { CoffeeNinjaLogoMark } from '@/components/ui/TopBrandBar';
 import { useAuth } from '@/context/AuthContext';
 import { useTheme } from '@/context/ThemeContext';
 import { USER_ROLE } from '@/types/inquiry.types';
+
+/**
+ * Custom Coffee Ninja SVG emblem combining a roasted coffee cup, steam, and ninja headband accent.
+ *
+ * @returns Brand logo SVG element.
+ */
+export function CoffeeNinjaLogoMark(): React.JSX.Element {
+  return (
+    <div className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-teal-600 to-teal-800 text-white shadow-sm ring-1 ring-teal-500/30 dark:from-teal-500 dark:to-teal-700">
+      <svg
+        viewBox="0 0 36 36"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className="h-6 w-6"
+        aria-hidden="true"
+      >
+        {/* Steam wisps */}
+        <path
+          d="M13 7C13 5.5 14.5 5 14.5 3.5"
+          stroke="#A7F3D0"
+          strokeWidth="1.8"
+          strokeLinecap="round"
+        />
+        <path
+          d="M19 6.5C19 5 20.5 4.5 20.5 3"
+          stroke="#A7F3D0"
+          strokeWidth="1.8"
+          strokeLinecap="round"
+        />
+        {/* Cup body */}
+        <path
+          d="M7 12H25V20C25 24.9706 20.9706 29 16 29C11.0294 29 7 24.9706 7 20V12Z"
+          fill="#FFFFFF"
+        />
+        {/* Cup handle */}
+        <path
+          d="M25 14H27.5C29.433 14 31 15.567 31 17.5C31 19.433 29.433 21 27.5 21H25"
+          stroke="#FFFFFF"
+          strokeWidth="2.4"
+          strokeLinecap="round"
+        />
+        {/* Ninja headband & eye visor across cup */}
+        <rect x="6.5" y="15.5" width="19" height="4.5" rx="2.25" fill="#1C1917" />
+        <circle cx="13" cy="17.75" r="1.15" fill="#5EEAD4" />
+        <circle cx="19" cy="17.75" r="1.15" fill="#5EEAD4" />
+        {/* Headband knot tails */}
+        <path
+          d="M6.5 17L3.5 15.2M6.5 18.2L3.8 20"
+          stroke="#F59E0B"
+          strokeWidth="1.8"
+          strokeLinecap="round"
+        />
+      </svg>
+    </div>
+  );
+}
 
 /**
  * Generates two-letter initials from a staff member's full name.

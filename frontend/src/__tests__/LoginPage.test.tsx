@@ -52,11 +52,11 @@ describe('LoginPage Split-Card Component', () => {
       })
     ).toBeInTheDocument();
 
-    // Switch preset from Alice to Manager
-    await user.click(screen.getByRole('button', { name: 'Manager' }));
-    expect(screen.getByLabelText(/Staff Email Address/i)).toHaveValue(
+    await user.type(
+      screen.getByLabelText(/Staff Email Address/i),
       'manager@coffeeninja.local'
     );
+    await user.type(screen.getByLabelText(/Password/i), 'ManagerPass123!');
     expect(screen.getByText('MANAGER')).toBeInTheDocument();
 
     await user.click(

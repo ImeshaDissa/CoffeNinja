@@ -8,40 +8,28 @@ import { ErrorBanner } from '@/components/ui/ErrorBanner';
 import { useAuth } from '@/context/AuthContext';
 import { ApiClientError } from '@/services/api-client';
 
-interface SeededAccountOption {
-  readonly shortLabel: string;
-  readonly label: string;
+interface RoleHintOption {
   readonly email: string;
-  readonly password: string;
   readonly roleBadge: string;
   readonly roleSummary: string;
 }
 
 /**
- * Seeded staff accounts provided for quick testing and evaluation, as permitted by the brief.
+ * Contextual role hints displayed when a known staff or manager email is entered.
  */
-const SEEDED_ACCOUNTS: readonly SeededAccountOption[] = [
+const ROLE_HINTS: readonly RoleHintOption[] = [
   {
-    shortLabel: 'Alice',
-    label: 'Alice Perera',
     email: 'alice@coffeeninja.local',
-    password: 'StaffPass123!',
     roleBadge: 'STAFF',
     roleSummary: 'Scoped access: views & manages inquiries recorded by Alice',
   },
   {
-    shortLabel: 'Bob',
-    label: 'Bob Silva',
     email: 'bob@coffeeninja.local',
-    password: 'StaffPass123!',
     roleBadge: 'STAFF',
     roleSummary: 'Scoped access: views & manages inquiries recorded by Bob',
   },
   {
-    shortLabel: 'Manager',
-    label: 'Nadia Fernando',
     email: 'manager@coffeeninja.local',
-    password: 'ManagerPass123!',
     roleBadge: 'MANAGER',
     roleSummary: 'Supervisor access: views & manages all staff inquiries',
   },
@@ -57,8 +45,8 @@ export default function LoginPage(): React.JSX.Element {
   const { user, isLoading, login } = useAuth();
   const router = useRouter();
 
-  const [email, setEmail] = useState<string>(SEEDED_ACCOUNTS[0].email);
-  const [password, setPassword] = useState<string>(SEEDED_ACCOUNTS[0].password);
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
@@ -68,20 +56,9 @@ export default function LoginPage(): React.JSX.Element {
     }
   }, [user, isLoading, router]);
 
-  const selectedPreset = SEEDED_ACCOUNTS.find(
+  const selectedPreset = ROLE_HINTS.find(
     (item) => item.email.toLowerCase() === email.trim().toLowerCase()
   );
-
-  /**
-   * Populates the sign-in inputs with a selected seeded staff account.
-   *
-   * @param account - Selected seeded account credentials.
-   */
-  const handleSelectSeededAccount = (account: SeededAccountOption): void => {
-    setEmail(account.email);
-    setPassword(account.password);
-    setErrorMessage(null);
-  };
 
   /**
    * Submits staff credentials to the backend authentication API.
@@ -151,32 +128,6 @@ export default function LoginPage(): React.JSX.Element {
                 />
               </div>
             )}
-
-            {/* Quick-Fill Seeded Demo Staff Selector */}
-            <div className="mb-4">
-              <p className="mb-1.5 text-[11px] font-semibold uppercase tracking-wider text-stone-400 dark:text-zinc-400">
-                Quick-Fill Demo Staff Account
-              </p>
-              <div className="grid grid-cols-3 gap-1.5">
-                {SEEDED_ACCOUNTS.map((account) => {
-                  const isActive = email === account.email;
-                  return (
-                    <button
-                      key={account.email}
-                      type="button"
-                      onClick={() => handleSelectSeededAccount(account)}
-                      className={`rounded-md border px-2 py-1.5 text-center text-xs font-semibold transition ${
-                        isActive
-                          ? 'border-[#5bc4ac] bg-[#eefaf7] text-teal-900 dark:border-teal-400 dark:bg-teal-950/60 dark:text-teal-200'
-                          : 'border-stone-200 bg-stone-50/70 text-stone-600 hover:bg-stone-100 dark:border-zinc-700 dark:bg-zinc-900/60 dark:text-zinc-300 dark:hover:bg-zinc-700/70'
-                      }`}
-                    >
-                      {account.shortLabel}
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
 
             <form
               onSubmit={(e) => void handleLoginSubmit(e)}
