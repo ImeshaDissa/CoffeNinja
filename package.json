@@ -1,0 +1,20 @@
+{
+  "name": "coffee-ninja-inquiry-system",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Customer Inquiry Management System - Coffee Ninja Fullstack Technical Assessment",
+  "scripts": {
+    "dev:backend": "npm --prefix backend run dev",
+    "dev:frontend": "npm --prefix frontend run dev",
+    "build:backend": "npm --prefix backend run build",
+    "build:frontend": "npm --prefix frontend run build",
+    "build": "npm run build:backend && npm run build:frontend",
+    "test:backend": "npm --prefix backend run test",
+    "test:frontend": "npm --prefix frontend run test",
+    "test": "npm run test:backend && npm run test:frontend",
+    "db:postgres": "npm --prefix backend run prisma:postgres",
+    "db:migrate": "npm --prefix backend run prisma:migrate",
+    "db:seed": "npm --prefix backend run prisma:seed",
+    "db:setup": "npm --prefix backend run prisma:generate && npm --prefix backend run prisma:migrate && npm --prefix backend run prisma:seed"
+  }
+}
